@@ -1,21 +1,22 @@
 import streamlit as st
 import pandas as pd
 import string
+import nltk
+nltk.download('stopwords')
 from nltk.corpus import stopwords
 import re
 
 # -------------------- TEXT CLEANING FUNCTION --------------------
 def transform_text(text):
     text = text.lower()
-    text = re.sub(r'[^\w\s]', '', text)
-
     words = text.split()
-
+    
+    # Stricter cleaning from your notebook
     final = []
+    stop_words = set(stopwords.words('english'))
     for word in words:
-        if word not in stopwords.words('english'):
+        if word.isalnum() and word not in stop_words and word not in string.punctuation:
             final.append(word)
-
     return " ".join(final)
 
 
@@ -91,34 +92,28 @@ with tabs[0]:
 # ==================== TAB 2 ====================
 with tabs[1]:
     st.header("🧹 Cleaning & Engineering")
-
     df = st.session_state.df
 
     if df is not None:
-
-        # Detect text column
-        if 'text' in df.columns:
-            text_col = 'text'
-        elif 'v2' in df.columns:
-            text_col = 'v2'
+        # Identify the correct column
+        text_col = 'v2' if 'v2' in df.columns else ('message' if 'message' in df.columns else None)
+        
+        if text_col:
+            if st.button("Apply Cleaning"):
+                with st.spinner("Cleaning text... please wait."):
+                    # Apply transformation
+                    df['clean_text'] = df[text_col].apply(transform_text)
+                    st.session_state.clean_df = df
+                st.success("Text cleaned successfully!")
+            
+            # This ensures the table stays visible after the button is clicked
+            if st.session_state.clean_df is not None:
+                st.write("### Cleaned Data Preview")
+                st.dataframe(st.session_state.clean_df[[text_col, 'clean_text']].head(10))
         else:
-            st.error("Text column not found!")
-            st.stop()
-
-        if st.button("Apply Cleaning"):
-            df['clean_text'] = df[text_col].apply(transform_text)
-            st.session_state.clean_df = df
-            st.success("Text cleaned successfully!")
-
-        if st.session_state.clean_df is not None:
-            st.write("### Cleaned Data Preview")
-            st.dataframe(
-                st.session_state.clean_df[[text_col, 'clean_text']].head()
-            )
-
+            st.error("Could not find a text column (v2 or message).")
     else:
         st.warning("Load dataset first")
-
 
 # ==================== TAB 3 ====================
 with tabs[2]:
