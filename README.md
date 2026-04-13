@@ -1,13 +1,13 @@
-# 📧 SpamShield: Interactive SVM Pipeline Visualizer
+# SpamShield: Interactive SVM Pipeline Visualizer
 
 **SpamShield** is an end-to-end Machine Learning dashboard built with Streamlit. It allows users to visualize the entire lifecycle of an Email Spam Detection system—from raw data exploration to real-time predictions using Support Vector Machines (SVM).
 
-## 🚀 Project Overview
+## Project Overview
 Most ML projects are "black boxes." This project aims to break down that box by providing an interactive interface for every step of the pipeline. You can tune hyperparameters like **C** and **Kernels** live and see how they affect the model's performance.
 
 ---
 
-## 🛠️ Key Features
+## Key Features
 
 * **Data & EDA Tab:** Explore the dataset, check the Spam/Ham ratio, and see raw email samples.
 * **Cleaning & Engineering Tab:** Watch how raw text is transformed into clean tokens using NLTK (lowercasing, stopword removal, and punctuation stripping).
@@ -17,7 +17,7 @@ Most ML projects are "black boxes." This project aims to break down that box by 
 
 ---
 
-## 💻 Tech Stack
+## Tech Stack
 * **Language:** Python
 * **Framework:** Streamlit
 * **ML Library:** Scikit-Learn
@@ -30,8 +30,7 @@ Most ML projects are "black boxes." This project aims to break down that box by 
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/HARSH-dev1708/your-repo-name.git](https://github.com/HARSH-dev1708/your-repo-name.git)
-   cd your-repo-name
+   git clone https://github.com/HARSH-dev1708/spamshield-svm-visualizer
 
 2. **Install Dependencies:**
     ```bash
