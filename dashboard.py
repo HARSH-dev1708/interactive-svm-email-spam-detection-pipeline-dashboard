@@ -21,7 +21,12 @@ def transform_text(text):
 
 
 # -------------------- PAGE CONFIG --------------------
-st.set_page_config(layout="wide")
+st.set_page_config(
+    page_title="SpamShield | SVM Pipeline",
+    page_icon="📧",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 
 # -------------------- SESSION STATE --------------------
 if "df" not in st.session_state:
@@ -47,8 +52,11 @@ if st.session_state.df is not None:
     st.sidebar.success("Dataset Loaded ✅")
 
 
-# -------------------- TITLE --------------------
-st.title("📊 Interactive ML Pipeline Dashboard")
+# -------------------- TITLE & DESCRIPTION --------------------
+st.title("📧 SpamShield: Interactive SVM Pipeline Visualizer")
+st.markdown("##### A comprehensive end-to-end visualization of the Email Spam Detection pipeline using Support Vector Machines (SVM).")
+
+st.info("Navigate through the tabs below to explore each stage—from raw data cleaning to real-time spam prediction.")
 
 # -------------------- TABS --------------------
 tabs = st.tabs([
