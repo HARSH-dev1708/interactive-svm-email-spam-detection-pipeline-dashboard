@@ -21,12 +21,7 @@ def transform_text(text):
 
 
 # -------------------- PAGE CONFIG --------------------
-st.set_page_config(
-    page_title="SpamShield | SVM Pipeline",
-    page_icon="📧",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
+st.set_page_config(layout="wide")
 
 # -------------------- SESSION STATE --------------------
 if "df" not in st.session_state:
@@ -54,7 +49,7 @@ if st.session_state.df is not None:
 
 # -------------------- TITLE & DESCRIPTION --------------------
 st.title("📧 SpamShield: Interactive SVM Pipeline Visualizer")
-st.markdown("##### A comprehensive end-to-end visualization of the Email Spam Detection pipeline using Support Vector Machines (SVM).")
+st.markdown("#### A comprehensive end-to-end visualization of the Email Spam Detection pipeline using Support Vector Machines (SVM).")
 
 st.info("Navigate through the tabs below to explore each stage—from raw data cleaning to real-time spam prediction.")
 
@@ -123,7 +118,6 @@ with tabs[1]:
     else:
         st.warning("Load dataset first")
 
-# ==================== TAB 3 ====================
 # ==================== TAB 3 ====================
 with tabs[2]:
     st.header("🎯 Feature Selection (TF-IDF Vectorization)")
@@ -196,7 +190,7 @@ with tabs[3]:
             kernel = st.selectbox("SVM Kernel", ["linear", "rbf", "poly", "sigmoid"])
             C = st.slider("C (Regularization)", 0.1, 10.0, 1.0)
 
-        if st.button("🚀 Train SVM Model"):
+        if st.button("Train SVM Model"):
             from sklearn.model_selection import train_test_split
             from sklearn.svm import SVC
             import time
